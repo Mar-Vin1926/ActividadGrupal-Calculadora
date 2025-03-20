@@ -29,29 +29,40 @@ usuario = st.text_input("Usuario")
 if usuario:
     registrar_usuario(usuario)
 
-   ##Input de los dígitos a operar
-    num1 = st.number_input("Número 1", step=1, format="%d") 
+    # Inputs de los números
+    num1 = st.number_input("Número 1", step=1, format="%d")
     num2 = st.number_input("Número 2", step=1, format="%d")
 
-    operacion = st.selectbox("Operación", ["+", "-", "*", "/","Potencia"])
+    operacion = st.selectbox("Operación", ["Sumar", "Restar", "Multiplicar", "Dividir", "Potencia", "Módulo"])
 
     if st.button("Calcular"):
-        if operacion == "+":
+        resultado = None  # Inicializar resultado
+
+        if operacion == "Sumar":
             resultado = num1 + num2
-        elif operacion == "-":
+        elif operacion == "Restar":
             resultado = num1 - num2
-        elif operacion == "*":
+        elif operacion == "Multiplicar":
             resultado = num1 * num2
-        elif operacion == "/":
+        elif operacion == "Dividir":
             if num2 != 0:
                 resultado = num1 / num2
             else:
                 st.error("No se puede dividir por cero.")
-                resultado = None
         elif operacion == "Potencia":
             resultado = num1 ** num2
+        elif operacion == "Módulo":
+            if num2 != 0:
+                resultado = num1 % num2
+                if resultado == 0:
+                    st.warning("El residuo es 0, significa que la división es exacta.")
+            else:
+                st.error("No se puede calcular módulo con divisor 0.")
+
+        # Mostrar el resultado solo si es válido
         if resultado is not None:
-            st.write(f"Resultado: {resultado}")
+            st.success(f"Resultado: {resultado}")
             registrar_operacion(usuario, f"{num1} {operacion} {num2}", resultado)
+
 else:
     st.warning("Por favor, ingresa un usuario.")
