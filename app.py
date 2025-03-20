@@ -33,7 +33,7 @@ if usuario:
     num1 = st.number_input("Número 1", step=1, format="%d") 
     num2 = st.number_input("Número 2", step=1, format="%d")
 
-    operacion = st.selectbox("Operación", ["+", "-", "*", "/"])
+    operacion = st.selectbox("Operación", ["+", "-", "*", "/","Potencia"])
 
     if st.button("Calcular"):
         if operacion == "+":
@@ -48,7 +48,8 @@ if usuario:
             else:
                 st.error("No se puede dividir por cero.")
                 resultado = None
-
+        elif operacion == "Potencia":
+            resultado = num1 ** num2
         if resultado is not None:
             st.write(f"Resultado: {resultado}")
             registrar_operacion(usuario, f"{num1} {operacion} {num2}", resultado)
