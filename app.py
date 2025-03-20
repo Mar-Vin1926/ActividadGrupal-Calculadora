@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import math
 
 # Función para registrar usuarios en Excel
 def registrar_usuario(usuario):
@@ -33,7 +34,7 @@ if usuario:
     num1 = st.number_input("Número 1", step=1, format="%d")
     num2 = st.number_input("Número 2", step=1, format="%d")
 
-    operacion = st.selectbox("Operación", ["Sumar", "Restar", "Multiplicar", "Dividir", "Potencia", "Módulo"])
+    operacion = st.selectbox("Operación", ["Sumar", "Restar", "Multiplicar", "Dividir", "Potencia", "Módulo", "Raíz"])
 
     if st.button("Calcular"):
         resultado = None  # Inicializar resultado
@@ -58,6 +59,12 @@ if usuario:
                     st.warning("El residuo es 0, significa que la división es exacta.")
             else:
                 st.error("No se puede calcular módulo con divisor 0.")
+        elif operacion == "Raíz":
+            if num1 >= 0:
+                resultado = math.sqrt(num1)
+            else:
+                st.error("No se puede calcular la raíz cuadrada de un número negativo.")
+                resultado = None
 
         # Mostrar el resultado solo si es válido
         if resultado is not None:
