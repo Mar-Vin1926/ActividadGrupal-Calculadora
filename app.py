@@ -29,8 +29,9 @@ usuario = st.text_input("Usuario")
 if usuario:
     registrar_usuario(usuario)
 
-    num1 = st.number_input("Número 1")
-    num2 = st.number_input("Número 2")
+   ##Input de los dígitos a operar
+    num1 = st.number_input("Número 1", step=1, format="%d") 
+    num2 = st.number_input("Número 2", step=1, format="%d")
 
     operacion = st.selectbox("Operación", ["+", "-", "*", "/"])
 
